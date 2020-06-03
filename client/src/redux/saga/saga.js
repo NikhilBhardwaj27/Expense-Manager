@@ -18,6 +18,7 @@ import {
     DELETE_EXPENSE_SUCCESS,
     DELETE_EXPENSE
 } from '../../redux/actions/actionTypes'
+
 const token = localStorage.getItem('token')
 
 // Generator Function for fetching Expenses of logged-in Users

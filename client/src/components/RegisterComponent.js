@@ -33,6 +33,7 @@ class RegisterComponent extends Component {
 
   render() {
     const val = localStorage.getItem('token')
+    console.log(this.props.state)
     return (
       <div className="background">
         
@@ -96,15 +97,13 @@ class RegisterComponent extends Component {
                   </Button>
                   
                 {this.props.state.auth.user
-                    ? 
-                    <>        
+                    ?       
                         <Modal show={this.state.show} onHide={this.handleClose}>
                             <Modal.Header closeButton>
                                 <Modal.Title>User Registration</Modal.Title>
                             </Modal.Header>
                             <Modal.Body>You Have been successfully Registered .. Login Now</Modal.Body>
                         </Modal>
-                    </>
                     : null
                 }
               </Card.Body>

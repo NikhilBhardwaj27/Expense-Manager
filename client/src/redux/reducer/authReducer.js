@@ -3,7 +3,7 @@ const initialState = {
     token:'',
     isAuthenticated:false,
     userLoading:false,
-    user:{}
+    user:null
 }
 
 const authReducer = (state = initialState,action) => {
