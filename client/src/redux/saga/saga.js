@@ -23,10 +23,10 @@ import {
 // Generator Function for fetching Expenses of logged-in Users
 function* fetchExpenses(){
     let token = localStorage.getItem('token')
-    
-    axios.defaults.headers.common['auth-token'] = token
-    
-    if(token != ""){
+
+    if(token){
+        
+        axios.defaults.headers.common['auth-token'] = token
         console.log('aa oye')
         try {
             const payload1 = yield call(axios.get,'/routes/api/expenses',{
