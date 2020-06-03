@@ -1,0 +1,56 @@
+* {
+  padding:0;
+  margin:0;
+}
+
+
+
+.react-icon{
+  color: white;
+  font-size: 50px;
+  padding: 10px;
+}
+
+.card-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.background {
+  background-image: url('jumbo.jpg');
+  height: 100vh;
+}
+
+.card-register {
+  width: auto;
+  float:right;
+  margin: 5%;
+}
+
+.card-login {
+  display:flex;
+  justify-content:center;
+  margin-top:5%;
+}
+
+.card-expenses {
+  margin:2%;
+}
+
+.card-register,.card-login,.card-expenses {
+    opacity: 1;
+    animation: fade 2s linear;
+}
+
+@keyframes fade {
+  0% { opacity: 0 }
+  100% { opacity: 1 }
+}
+
+@media only screen and (max-width: 400px) {
+  /* For mobile phones: */
+  .card-register {
+    width:90%;
+  }
+}

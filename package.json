@@ -1,0 +1,24 @@
+{
+  "name": "expense-manager",
+  "version": "1.0.0",
+  "description": "This is my first app",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+  },
+  "author": "Nikhil",
+  "license": "ISC",
+  "dependencies": {
+    "@hapi/joi": "^15.1.1",
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.9.7"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.3"
+  }
+}
