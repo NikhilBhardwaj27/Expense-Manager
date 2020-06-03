@@ -91,7 +91,7 @@ function AddComponent(props) {
 
   return (
     <>
-      <Button to="/expense/add-expense" variant="dark" style={{margin:'2% 0% 0% 2%'}} onClick={() => setModalShow(true)}>
+      <Button variant="dark" style={{margin:'2% 0% 0% 2%'}} onClick={() => setModalShow(true)}>
         Add Expense
       </Button>
       

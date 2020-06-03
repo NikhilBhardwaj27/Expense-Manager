@@ -6,6 +6,7 @@ import RegisterComponent from './components/RegisterComponent'
 import LoginComponent from './components/LoginComponent'
 import LogoutComponent from './components/LogoutComponent'
 import ExpenseComponent from './components/ExpenseComponent'
+import {fetchExpenses} from './redux/actions/action'
 import {connect} from 'react-redux'
 
 
@@ -30,4 +31,10 @@ const mapStateToProps = state => {
   return {state}
 }
 
-export default connect(mapStateToProps,null)(App)
+const mapDispatchToProps = dispatch => {
+  return {
+      expenses:()=>{dispatch(fetchExpenses())}
+  }    
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(App)

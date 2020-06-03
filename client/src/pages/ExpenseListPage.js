@@ -86,7 +86,6 @@ export class ExpenseListPage extends Component {
                     </Card.Body>
                 </Card>
                 )
-
             ) 
         }
        </div>
@@ -96,9 +95,7 @@ export class ExpenseListPage extends Component {
 
 
 const mapStateToProps = state => {
-    return {
-        state:state.expenses
-    }
+    return {state}
 }
 
 const mapDispatchToProps = dispatch => {

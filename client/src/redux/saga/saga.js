@@ -19,21 +19,23 @@ import {
     DELETE_EXPENSE
 } from '../../redux/actions/actionTypes'
 
-const token = localStorage.getItem('token')
 
 // Generator Function for fetching Expenses of logged-in Users
-function* fetchExpenses(token){
+function* fetchExpenses(){
+    let token = localStorage.getItem('token')
     
-    if(token.token){
+    axios.defaults.headers.common['auth-token'] = token
+    
+    if(token != ""){
+        console.log('aa oye')
         try {
             const payload1 = yield call(axios.get,'/routes/api/expenses',{
-                    headers:{
-                        'auth-token':token.token
-                    }
-                })
-                axios.defaults.headers.common['auth-token'] = localStorage.getItem('token')
-                const payload = payload1.data
-                yield put({type:FETCH_EXPENSES_SUCCESS,payload})
+                headers:{
+                    'auth-token':token
+                }})
+
+            const payload = payload1.data
+            yield put({type:FETCH_EXPENSES_SUCCESS,payload})
             }catch(e){
                 console.log(e)
             }
@@ -69,6 +71,7 @@ function* userLogging(payload){
 
         //if logging success else fail 
         if(!payload2.message){
+
             localStorage.setItem('token',payload2.token)
             yield put({type:USER_LOGGING_SUCCESS,payload2})
         }else {
@@ -140,7 +143,8 @@ function* addExpense(data){
         if(payload.message){
             yield put({type:ADD_EXPENSE_FAIL,payload})
         }else {
-            yield put({type:'FETCH_EXPENSES',token:token})
+            
+            yield put({type:'FETCH_EXPENSES'})
             yield put({type:ADD_EXPENSE_SUCCESS})
         }
 
@@ -173,7 +177,7 @@ function* editExpense(data){
         if(payload.message){
             yield put({type:EDIT_EXPENSE_FAIL,payload})
         }else {
-            yield put({type:'FETCH_EXPENSES',token:token})
+            yield put({type:'FETCH_EXPENSES'})
             yield put({type:EDIT_EXPENSE_SUCCESS})
             
         }
@@ -192,20 +196,19 @@ function* watchEditExpense(){
 // Generator Function for deleting expense
 function* deleteExpense(data){
     const id  = data._id
-    console.log(id)
     try {
         yield call(axios.delete,'/routes/api/expenses/delete',{
             headers:{
                 'id':id
             }
         })
-            
-            yield put({type:'FETCH_EXPENSES',token:token})
-            yield put({type:DELETE_EXPENSE_SUCCESS})
+        yield put({type:DELETE_EXPENSE_SUCCESS})
+        yield put({type:'FETCH_EXPENSES'})
     }catch(err){
         console.log(err)
     }
 }
+
 // Watcher to watch for Delete expense generator functions
 function* watchDeleteExpense(){
     yield takeEvery(DELETE_EXPENSE,deleteExpense)

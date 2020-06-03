@@ -12,24 +12,19 @@ export class ExpenseComponent extends Component {
     constructor(props){
         super(props)
         this.token = null;
-    }
-
-    componentDidMount(){
         this.token = localStorage.getItem('token')
-        this.props.expenses(this.token)
-    }
-
-    componentWillReceiveProps(props){
-
-        this.sum = 0
-        props.state.expenses.map((expense)=>{
-           return this.sum+=expense.ItemAmount
-        })
+        this.props.expenses()
     }
 
     render() {
+        this.sum = 0
         return (
             <>
+            {console.log(this.props)}
+            {this.props.state.expenses.map((expense)=>{
+                this.sum+=expense.ItemAmount
+             })}
+
             {this.token 
                 ? 
                 <>
@@ -39,8 +34,6 @@ export class ExpenseComponent extends Component {
                 : 
                 null
             }
-
-
                 <div className="card-container">
                     {!this.props.state.loading ?null  :
                         <>
@@ -65,15 +58,12 @@ export class ExpenseComponent extends Component {
 
 
 const mapStateToProps = state => {
-    return {
-        state:state.expenses,
-        auth:state.auth
-        }
+    return {state:state.expenses}
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        expenses:(token)=>{dispatch(fetchExpenses(token))}
+        expenses:()=>{dispatch(fetchExpenses())}
     }    
 }
 
